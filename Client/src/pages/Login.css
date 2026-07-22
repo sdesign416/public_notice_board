@@ -1,0 +1,105 @@
+/* 전체 레이아웃 (화면 중앙 정렬 느낌) */
+.login-container {
+    max-width: 440px;
+    margin: 80px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 카드형 폼 디자인 */
+.login-card-form {
+    background: #ffffff;
+    border: 1px solid #e1e4e8;
+    border-radius: 12px;
+    padding: 36px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.login-card-form h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #24292e;
+    margin-bottom: 24px;
+    text-align: center;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 16px;
+}
+
+.error-msg {
+    color: #d73a49;
+    background-color: #ffeef0;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* 입력 필드 그룹 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #333;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0066ff;
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+}
+
+/* 버튼 그룹 영역 */
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.form-actions button {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+/* 로그인 버튼 (메인 색상) */
+.btn-login {
+    background-color: #0066ff;
+    color: #ffffff;
+}
+
+.btn-login:hover {
+    background-color: #0052cc;
+}
+
+/* 회원가입 버튼 (서브 색상) */
+.btn-signup {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+
+.btn-signup:hover {
+    background-color: #e5e7eb;
+}
