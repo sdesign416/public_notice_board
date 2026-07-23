@@ -50,7 +50,7 @@ export async function getSort(sort) {
         case "like":
             return getPosts()
                 .aggregate([
-                    {$addFields:{likeCount: {$size: "$likes"}}},
+                    {$addFields:{likeCount: {$size: {$ifNull: ["$likes", []]}}}},
                     {$sort: {likeCount: -1, createdAt: -1}}
                 ])
                 .toArray()

@@ -48,7 +48,7 @@ export async function me(req, res) { //헤더 통해 처리하려고 req,res 받
     if (!user) {
         return res.status(404).json({ message: "일치하는 사용자가 없음" })
     }
-    res.status(200).json({ token: req.token, userid: user.userid })
+    res.status(200).json({ token: req.token, userid: user.userid, user_id : user._id })
 }
 
 async function createJwtToken(id) {

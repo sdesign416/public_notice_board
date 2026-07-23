@@ -79,7 +79,7 @@ export async function updatePost(req, res) {
         })
     }
     // 이미지가 있으면 접근 경로 저장
-    const image = req.file ? `/uploads/posts/${req.file.filename}` : null
+    const image = req.file ? `/uploads/posts/${req.file.filename}` : post.image
 
     const post = await postRepository.getById(postid)
 
