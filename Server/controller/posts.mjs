@@ -35,6 +35,20 @@ export async function createPost(req, res) {
     }
 }
 
+// 로그인 화면 미리보기
+export async function previewPosts(req, res) {
+    try {
+        const posts = await postRepository.getPreviewPosts()
+
+        return res.status(200).json(posts)
+    } catch (error) {
+        console.error("미리보기 조회 오류:", error)
+        return res.status(500).json({
+            message: "미리보기 조회에 실패했습니다.",
+        })
+    }
+}
+
 // 모든 포스트를 가져오는 함수
 export async function getPosts(req, res) {
     // post?userid=apple 라서 userid를 query로 받아옴

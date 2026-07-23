@@ -2,7 +2,7 @@ import { Activity, useState } from "react"
 import { useEffect } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import styles from "./Home.module.css"
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart , AiOutlineUser} from "react-icons/ai";
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -116,14 +116,21 @@ export default function Home() {
         }
     }
 
-    const handleDelete = async (id) => {
-        const isconfirmed = window.confirm("게시글을 삭제하시겠습니까?")
-        if (!isconfirmed) return
-
+    const handleDelete = async (post) => {
         const token = localStorage.getItem("token")
+        if (currentUserId !== post.idx) {
+            alert("삭제는 작성자 본인만 가능합니다")
+            return
+        }
+
+        const isConfirmed = window.confirm("게시글을 삭제하시겠습니까?")
+
+        if (!isConfirmed) {
+            return
+        }
 
         try {
-            const response = await fetch(`${API_URL}/post/${id}`, {
+            const response = await fetch(`${API_URL}/post/${post._id}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": "Bearer " + token
@@ -140,18 +147,51 @@ export default function Home() {
         }
     }
 
-    const formatNiceDate = (isoString) => {
-        if (!isoString) return ""
-        const date = new Date(isoString)
-        return new Intl.DateTimeFormat('ko-KR', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false
-        }).format(date)
-    }
+const formatNiceDate = (isoString) => {
+    if (!isoString) return ""
+        const createdDate = new Date(isoString)
+        const now = new Date()
+
+        // 현재 시간 - 작성 시간
+        const difference = now - createdDate
+
+        // 잘못된 날짜
+        if (Number.isNaN(createdDate.getTime())) {
+            return ""
+        }
+
+        // 미래 시간으로 저장된 경우
+        if (difference < 0) {
+            return "방금 전"
+        }
+
+        const seconds = Math.floor(difference / 1000)
+        const minutes = Math.floor(seconds / 60)
+        const hours = Math.floor(minutes / 60)
+        const days = Math.floor(hours / 24)
+
+        if (seconds < 60) {
+            return "방금 전"
+        }
+
+        if (minutes < 60) {
+            return `${minutes}분 전`
+        }
+
+        if (hours < 24) {
+            return `${hours}시간 전`
+        }
+
+        if (days < 30) {
+            return `${days}일 전`
+        }
+
+        return new Intl.DateTimeFormat("ko-KR", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit"
+        }).format(createdDate)
+    }
 
     return (
         <section className={styles.homeContainer}>
@@ -189,12 +229,17 @@ export default function Home() {
                                     <div className={styles.date}>
                                         <span>{formatNiceDate(post.createdAt)}</span>
                                     </div>
+                                    <div className="{styles.usename">
+                                        <span>
+                                            <AiOutlineUser /> {post.name}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
                             <div className={styles.buttonBox}>
                                 <button className={styles.editBtn} type="button" onClick={() => handleEdit(post)}>수정</button>
-                                <button className={styles.delBtn} type="button" onClick={() => handleDelete(post._id)}>삭제</button>
+                                <button className={styles.delBtn} type="button" onClick={() => handleDelete(post)}>삭제</button>
                             </div>
                         </li>
                     )

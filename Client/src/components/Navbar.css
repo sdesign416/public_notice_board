@@ -59,7 +59,7 @@
 
 /* 주석으로 요청하신 조건들을 반영한 버튼 스타일 */
 .navbar-btn {
-    background-color: #0066ff; /* 배경 색 농도 */
+    background-color: var(--main-color); /* 배경 색 농도 */
     color: #ffffff;
     font-size: 14px;
     font-weight: 500;
@@ -71,5 +71,5 @@
 }
 
 .navbar-btn:hover {
-    background-color: #0052cc; /* 마우스 올렸을 때 조금 더 진해짐 */
+    background-color: var(--main-hover); /* 마우스 올렸을 때 조금 더 진해짐 */
 }

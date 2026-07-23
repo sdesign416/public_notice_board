@@ -9,6 +9,9 @@ const router = express.Router()
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename)
 
+// 미리보기
+router.get("/preview", postController.previewPosts)
+
 // 전체 포스트 가져오기
 // http://127.0.0.1:8080/post (GET)
 // http://127.0.0.1:8080/post?userid=apple (GET)
@@ -43,5 +46,6 @@ router.put("/:postid/like",isAuth,postController.likePost)
 // 포스트 삭제하기
 // http://127.0.0.1:8080/post/:id (DELETE)
 router.delete("/:postid",isAuth,postController.deletePost)
+
 
 export default router

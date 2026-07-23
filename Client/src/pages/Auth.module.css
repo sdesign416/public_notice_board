@@ -1,0 +1,242 @@
+/* Auth.module.css */
+
+/* ===========================
+   Common
+=========================== */
+:global(.auth-container),
+:global(.auth-container *) {
+    box-sizing: border-box;
+}
+
+/* ===========================
+   Auth Layout
+=========================== */
+:global(.auth-container) {
+    width: 100%;
+    min-height: 100vh;
+    padding: 50px 20px 70px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* ===========================
+   Auth Card
+=========================== */
+:global(.auth-card-form) {
+    width: 100%;
+    max-width: 480px;
+    padding: 55px 36px 36px;
+
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+
+    box-shadow: var(--shadow-sm);
+}
+
+/* 회원가입 제목 */
+:global(.auth-card-form h2) {
+    margin: 0 0 24px;
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid var(--border-color);
+
+    color: var(--text-color);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* ===========================
+   Error Message
+=========================== */
+:global(.error-msg) {
+    width: 100%;
+    margin: 0 0 18px;
+    padding: 12px 14px;
+
+    background: #fff3f7;
+    border: 1px solid var(--main-color);
+    border-radius: 8px;
+
+    color: var(--main-hover);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* ===========================
+   Form
+=========================== */
+:global(.auth-form) {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* 입력 필드 그룹 */
+:global(.form-group) {
+    width: 100%;
+    margin-bottom: 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* 입력 필드 이름 */
+:global(.form-group label) {
+    margin-bottom: 8px;
+
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* 입력창 */
+:global(.form-group input) {
+    width: 100%;
+    height: 46px;
+    padding: 0 14px;
+
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+    transition: var(--transition);
+}
+
+/* 입력창 안내 문구 */
+:global(.form-group input::placeholder) {
+    color: var(--form-color);
+}
+
+/* 입력창 마우스 올림 */
+:global(.form-group input:hover) {
+    border-color: var(--main-color);
+}
+
+/* 입력창 선택 */
+:global(.form-group input:focus) {
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 3px rgba(255, 173, 203, 0.2);
+}
+
+/* ===========================
+   Buttons
+=========================== */
+:global(.form-actions) {
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    border-top: 1px solid var(--border-color);
+}
+
+/* 버튼 공통 */
+:global(.form-actions button) {
+    width: 100%;
+    height: 46px;
+    padding: 0;
+
+    border: none;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+/* 가입하기 버튼 */
+:global(.btn-signup-submit) {
+    background: var(--main-color);
+    color: #fff;
+}
+
+:global(.btn-signup-submit:hover) {
+    background: var(--main-hover);
+}
+
+/* 돌아가기 버튼 */
+:global(.btn-back) {
+    background: var(--form-bg);
+    color: var(--text-color);
+}
+
+:global(.btn-back:hover) {
+    background: var(--border-color);
+}
+
+/* 버튼 클릭 */
+:global(.form-actions button:active) {
+    transform: translateY(1px);
+}
+
+/* 키보드로 버튼 선택 */
+:global(.form-actions button:focus-visible) {
+    outline: 2px solid var(--main-color);
+    outline-offset: 2px;
+}
+
+/* ===========================
+   Tablet
+=========================== */
+@media (max-width: 768px) {
+    :global(.auth-container) {
+        padding: 35px 16px 50px;
+    }
+
+    :global(.auth-card-form) {
+        padding: 40px 26px 28px;
+    }
+
+    :global(.auth-card-form h2) {
+        font-size: 24px;
+    }
+}
+
+/* ===========================
+    Mobile
+=========================== */
+@media (max-width: 480px) {
+    :global(.auth-container) {
+        padding: 25px 12px 40px;
+    }
+
+    :global(.auth-card-form) {
+        padding: 32px 20px 24px;
+
+        border-radius: 12px;
+    }
+
+    :global(.auth-card-form h2) {
+        font-size: 22px;
+    }
+
+    :global(.form-group) {
+        margin-bottom: 18px;
+    }
+
+    :global(.form-group input),
+    :global(.form-actions button) {
+        height: 44px;
+    }
+}

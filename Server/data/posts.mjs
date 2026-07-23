@@ -33,6 +33,11 @@ export async function getById(postid) {
     return getPosts().find({ _id: new ObjectId(postid) }).next().then(mapOptionalPost)
 }
 
+// 미리보기
+export async function getPreviewPosts() {
+    return getPosts().find().sort({ createdAt: -1 }).limit(3).toArray()
+}
+
 // 포스트 정렬
 export async function getSort(sort) {
 

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import "./Auth.css" // CSS 파일 임포트
+import styles from "./Auth.module.css" // CSS 파일 임포트
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -56,7 +56,7 @@ export default function Auth() {
     }
 
     return (
-        <main className="auth-container">
+        <div className="auth-container">
             <div className="auth-card-form">
                 <h2>회원가입</h2>
 
@@ -113,6 +113,6 @@ export default function Auth() {
                     </div>
                 </form>
             </div>
-        </main>
+        </div>
     )
 }

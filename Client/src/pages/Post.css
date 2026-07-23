@@ -61,7 +61,7 @@
 .form-group input[type="text"]:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #0066ff;
+    border-color: var(--main-color);
     box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
 }
 
@@ -138,12 +138,12 @@
 }
 
 .btn-submit {
-    background-color: #0066ff;
+    background-color: var(--main-color);
     color: #ffffff;
 }
 
 .btn-submit:hover {
-    background-color: #0052cc;
+    background-color: var(--main-hover);
 }
 
 .btn-cancel {

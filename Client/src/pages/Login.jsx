@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import "./Login.css" // CSS 파일 임포트
+import styles from "./Login.module.css" // CSS 파일 임포트
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -8,8 +8,29 @@ export default function Login() {
     const [id, setId] = useState("")
     const [pw, setPw] = useState("")
     const [error, setError] = useState("")
+    const [posts, setPosts] = useState([])
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        const fetchPreviewPosts = async () => {
+            try {
+                const response = await fetch(`${API_URL}/post/preview`)
+                if (!response.ok) {
+                    const text = await response.text()
+                    console.error("서버 응답:", response.status, text)
+                    throw new Error(`미리보기 조회 실패: ${response.status}`)
+                }
+                const data = await response.json()
+                console.log("미리보기 포스트:", data)
+                setPosts(data)
+            } catch (error) {
+                console.error("전체 포스트 조회 실패", error)
+            }
+        }
+        fetchPreviewPosts()
+    }, [])
+
 
     const handleSend = () => {
         navigate('/auth')
@@ -53,14 +74,14 @@ export default function Login() {
     }
 
     return (
-        <main className="login-container">
-            <div className="login-card-form">
+        <div className={styles.loginContainer}>
+            <div className={styles.loginFormWr}>
                 <h2>로그인</h2>
 
                 {error && <p className="error-msg">{error}</p>}
 
-                <form onSubmit={handleClick} className="login-form">
-                    <div className="form-group">
+                <form onSubmit={handleClick} className={styles.loginForm}>
+                    <div className={styles.formGroup}>
                         <label htmlFor="loginInput">아이디</label>
                         <input 
                             type="text" 
@@ -71,7 +92,7 @@ export default function Login() {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className={styles.formGroup}>
                         <label htmlFor="pwInput">비밀번호</label>
                         <input 
                             type="password" 
@@ -82,12 +103,29 @@ export default function Login() {
                         />
                     </div>
 
-                    <div className="form-actions">
-                        <button type="submit" id="loginBtn" className="btn-login">로그인</button>
-                        <button type="button" id="signBtn" className="btn-signup" onClick={handleSend}>회원가입</button>
+                    <div className={styles.formActions}>
+                        <button type="submit" id="loginBtn" className={styles.btnLogin}>로그인</button>
+                        <button type="button" id="signBtn" className={styles.btnSignup} onClick={handleSend}>회원가입</button>
                     </div>
                 </form>
             </div>
-        </main>
+            <ul className={styles.previewList}> 
+                <p className={styles.subTit}>
+                    최근 게시글
+                    <span>로그인 후 게시판 전체 열람이 가능합니다.</span>
+                </p>
+            {posts.map((post) => (
+                <li key={post._id} className={styles.prevBoard}>
+
+                    <div >
+                        <strong>{post.title}</strong>
+                        {/* <p>{post.name}</p> */}
+                        <p>{post.content}</p>
+                    </div>
+
+                </li>
+            ))}
+            </ul>
+        </div>
     )
 }
